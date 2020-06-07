@@ -9,56 +9,49 @@
 
 <body>
 
+  <canvas id="canvas" width="200" height="100" />
+
   <script>
     let isRunning = true;
+    let canvas;
+    let context;
+
+
+    function init() {
+      canvas = document.getElementById('canvas');
+      context = canvas.getContext('2d');
+
+      window.requestAnimationFrame(run);
+    }
 
     function run() {
       console.log('Start');
+      tick();
+      render();
 
-      let lastTime = Date.now();
-      const amountOfTicks = 60;
-      const ns = 1000 / amountOfTicks;
-      let delta = 0;
-      let frames = 0;
-      let timer = Date.now();
-
-      while (isRunning) {
-        let now = Date.now();
-        delta += (now - lastTime) / ns;
-        lastTime = now;
-
-        if (delta >= 1) {
-          tick();
-          render();
-          frames++
-          delta--;
-        }
-
-        if (Date.now() - timer >= 1000) {
-          console.log(frames);
-          frames = 0;
-          timer += 1000;
-        }
-      }
-
-
-
+      window.requestAnimationFrame(run);
     }
 
     function tick() {
-      // console.log('tick');
-
+      console.log('tick');
     }
 
     function render() {
-      // console.log('render');
+      console.log('render');
 
+      let color = '#000';
+      context.fillStyle = color;
+      context.fillRect(0, 0, 200, 100);
+
+      color = '#0099b0'
+      context.fillStyle = color;
+      context.fillRect(10, 20, 50, 60);
+      context.fillStyle = '#fff';
+      context.font = '20px Georgia'
+      context.fillText('Hello world', 10, 50)
     }
 
-    console.log('1');
-
-    setTimeout(run, 10)
-    // run();
+    init();
   </script>
 </body>
 
