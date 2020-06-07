@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Loop</title>
+</head>
+
+<body>
+
+  <script>
+    let isRunning = true;
+
+    function run() {
+      console.log('Start');
+
+      let lastTime = Date.now();
+      const amountOfTicks = 60;
+      const ns = 1000 / amountOfTicks;
+      let delta = 0;
+      let frames = 0;
+      let timer = Date.now();
+
+      while (isRunning) {
+        let now = Date.now();
+        delta += (now - lastTime) / ns;
+        lastTime = now;
+
+        if (delta >= 1) {
+          tick();
+          render();
+          frames++
+          delta--;
+        }
+
+        if (Date.now() - timer >= 1000) {
+          console.log(frames);
+          frames = 0;
+          timer += 1000;
+        }
+      }
+
+
+
+    }
+
+    function tick() {
+      // console.log('tick');
+
+    }
+
+    function render() {
+      // console.log('render');
+
+    }
+
+    console.log('1');
+
+    setTimeout(run, 10)
+    // run();
+  </script>
+</body>
+
+</html>
