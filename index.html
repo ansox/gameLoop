@@ -19,11 +19,21 @@
     image.src = './idle.png';
     image.onload = () => init();
     x = 0
-
+    let frames = 0;
+    let maxFrames = 5;
+    let curAnimation = 0;
+    maxAnimation = 6;
+    const player = [];
 
     function init() {
       canvas = document.getElementById('canvas');
       context = canvas.getContext('2d');
+      player.push(0);
+      player.push(16 * 1);
+      player.push(16 * 2);
+      player.push(16 * 3);
+      player.push(16 * 4);
+      player.push(16 * 5);
 
       window.requestAnimationFrame(run);
     }
@@ -38,6 +48,16 @@
 
     function tick() {
       console.log('tick');
+
+      frames++;
+      if (frames > maxFrames) {
+        frames = 0;
+
+        curAnimation++;
+        if (curAnimation >= maxAnimation) {
+          curAnimation = 0;
+        }
+      }
     }
 
     function render() {
@@ -48,11 +68,11 @@
       context.fillStyle = color;
       context.fillRect(0, 0, 400, 200);
 
+      context.drawImage(image, player[curAnimation], 0, 16, 16, 0, 0, 48, 48);
 
+      // context.fillStyle = "rgba(0, 0, 200, 0.5)";
+      // context.fillRect(0, 0, 400, 200);
 
-      context.drawImage(image, 32, 0, 16, 16, x, 0, 48, 48);
-      context.fillStyle = "rgba(0, 0, 200, 0.5)";
-      context.fillRect(0, 0, 400, 200);
       x += 3
 
       color = '#0099b0'
