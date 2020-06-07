@@ -9,12 +9,16 @@
 
 <body>
 
-  <canvas id="canvas" width="200" height="100" />
+  <canvas id="canvas" width="400" height="200" />
 
   <script>
     let isRunning = true;
     let canvas;
     let context;
+    let image = new Image();
+    image.src = './idle.png';
+    image.onload = () => init();
+    x = 0
 
 
     function init() {
@@ -39,19 +43,23 @@
     function render() {
       console.log('render');
 
-      let color = '#000';
+
+      let color = '#fff';
       context.fillStyle = color;
-      context.fillRect(0, 0, 200, 100);
+      context.fillRect(0, 0, 400, 200);
+
+      context.drawImage(image, 32, 0, 16, 16, x, 0, 48, 48);
+      x += 3
 
       color = '#0099b0'
       context.fillStyle = color;
-      context.fillRect(10, 20, 50, 60);
-      context.fillStyle = '#fff';
+      context.fillRect(50, 50, 100, 100);
+      context.fillStyle = '#000';
       context.font = '20px Georgia'
-      context.fillText('Hello world', 10, 50)
+      context.fillText('Hello world', 60, 70)
     }
 
-    init();
+    // init();
   </script>
 </body>
 
